@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Users;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\User_Detail;
-use App\Traits\ApiHttpResponses;
 use Illuminate\Http\Request;
+use App\Traits\ApiHttpResponses;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller {
@@ -23,7 +23,7 @@ class UserProfileController extends Controller {
 
     public function updatePhone( Request $request, User $user ) {
 
-// Check if the authenticated user is updating his/her own profile
+//? Check if the authenticated user is updating his/her own profile
         if ( $response = $this->authorizeUser( $user ) ) {
             return $response;
         }
@@ -41,7 +41,7 @@ class UserProfileController extends Controller {
 
     public function updatePassword( Request $request, User $user ) {
 
-// Check if the authenticated user is updating his/her own profile
+//? Check if the authenticated user is updating his/her own profile
 
         if ( $response = $this->authorizeUser( $user ) ) {
             return $response;
@@ -60,8 +60,7 @@ class UserProfileController extends Controller {
 
     public function updateUserDetails( Request $request, User $user ) {
 
-// Check if the authenticated user is updating his/her own details
-
+//? Check if the authenticated user is updating his/her own details
         if ( $response = $this->authorizeUser( $user ) ) {
             return $response;
         }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\BothBuyAndSellUsers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Traits\ApiHttpResponses;
 use Illuminate\Http\Request;
+use App\Traits\ApiHttpResponses;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class GetBothBuyAndSellUsersController extends Controller {
@@ -116,8 +116,8 @@ class GetBothBuyAndSellUsersController extends Controller {
         // Get search parameters
         $division = $request->input( 'division' );
         $district = $request->input( 'district' );
-        $upazila = $request->input( 'upazila' );
-        $area = $request->input( 'area' );
+        $upazila  = $request->input( 'upazila' );
+        $area     = $request->input( 'area' );
 
         $query = User::with( ['userDetail.division', 'userDetail.district', 'userDetail.upazila', 'roles'] )
             ->whereHas( 'roles', function ( $query ) use ( $roles ) {
@@ -150,20 +150,18 @@ class GetBothBuyAndSellUsersController extends Controller {
         }
 
         $users = $query->get()
-            ->map( function ( $user ) {
-                return [
-                    'id'      => $user->id,
-                    'phone'   => $user->phone,
-                    'role'    => $user->roles->pluck( 'name' ),
-                    'details' => [
-                        'name'     => $user->userDetail->name ?? null,
-                        'division' => $user->userDetail->division->name ?? null,
-                        'district' => $user->userDetail->district->name ?? null,
-                        'upazila'  => $user->userDetail->upazila->name ?? null,
-                        'area'     => $user->userDetail->area ?? null,
-                    ],
-                ];
-            } );
+            ->map( fn( $user ) => [
+                'id'      => $user->id,
+                'phone'   => $user->phone,
+                'role'    => $user->roles->pluck( 'name' ),
+                'details' => [
+                    'name'     => $user->userDetail->name ?? null,
+                    'division' => $user->userDetail->division->name ?? null,
+                    'district' => $user->userDetail->district->name ?? null,
+                    'upazila'  => $user->userDetail->upazila->name ?? null,
+                    'area'     => $user->userDetail->area ?? null,
+                ],
+            ] );
 
         return $this->successResponse( $users, 'Users fetched successfully' );
     }

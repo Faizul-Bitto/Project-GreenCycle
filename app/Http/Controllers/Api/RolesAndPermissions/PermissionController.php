@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api\RolesAndPermissions;
 
-use App\Http\Controllers\Controller;
 use App\Traits\ApiHttpResponses;
+use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller {
+
     use ApiHttpResponses;
 
     public function index() {

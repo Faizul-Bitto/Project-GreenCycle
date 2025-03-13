@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Post;
 
+use App\Models\Post;
+use Illuminate\Http\Request;
+use App\Traits\ApiHttpResponses;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequests\StorePostRequest;
 use App\Http\Requests\PostRequests\UpdatePostRequest;
-use App\Models\Post;
-use App\Traits\ApiHttpResponses;
-use Illuminate\Http\Request;
 
 class PostController extends Controller {
 
@@ -62,7 +62,7 @@ class PostController extends Controller {
 
     public function store( StorePostRequest $request ) {
         $validatedData = $request->validated();
-        $user = $request->user();
+        $user          = $request->user();
 
         if ( !$user ) {
             return $this->errorResponse( 'Unauthorized', 401 );

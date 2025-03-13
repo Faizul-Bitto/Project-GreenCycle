@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api\RolesAndPermissions;
 
-use App\Http\Controllers\Controller;
-use App\Traits\ApiHttpResponses;
 use Illuminate\Http\Request;
+use App\Traits\ApiHttpResponses;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 
 class RoleController extends Controller {
+
     use ApiHttpResponses;
 
     public function index() {
@@ -31,7 +32,7 @@ class RoleController extends Controller {
                 'name' => $request->input( 'name' ),
             ] );
 
-            // Sync the permissions to the role
+            //? Sync the permissions to the role
             $role->syncPermissions( $request->input( 'permissions' ) );
 
             return $this->successResponse( ['role' => $role], 'Role created successfully', 201 );
@@ -60,7 +61,7 @@ class RoleController extends Controller {
             $role->name = $request->input( 'name' );
             $role->save();
 
-            // Sync the permissions to the role
+            //? Sync the permissions to the role
             $role->syncPermissions( $request->input( 'permissions' ) );
 
             return $this->successResponse( ['role' => $role], 'Role updated successfully', 200 );

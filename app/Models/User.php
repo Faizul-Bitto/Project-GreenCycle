@@ -4,14 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\File;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use HasFactory, Notifiable, HasApiTokens, HasRoles;
 
     /**
@@ -39,26 +39,22 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
+    public function posts() {
+        return $this->hasMany( Post::class );
     }
 
-    public function files()
-    {
-        return $this->morphMany(File::class, 'fileable');
+    public function files() {
+        return $this->morphMany( File::class, 'fileable' );
     }
 
-    public function userDetail()
-    {
-        return $this->hasOne(User_Detail::class);
+    public function userDetail() {
+        return $this->hasOne( User_Detail::class );
     }
 }

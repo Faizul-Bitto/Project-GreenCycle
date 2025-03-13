@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api\Products;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Traits\ApiHttpResponses;
 use Illuminate\Http\Request;
+use App\Traits\ApiHttpResponses;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller {
+
     use ApiHttpResponses;
 
     public function index() {
@@ -21,7 +22,7 @@ class ProductController extends Controller {
             'parent_id' => 'nullable|exists:products,id',
         ] );
 
-        $parent = Product::find( $data['parent_id'] );
+        $parent  = Product::find( $data['parent_id'] );
         $product = new Product( ['name' => $data['name']] );
 
         if ( $parent ) {

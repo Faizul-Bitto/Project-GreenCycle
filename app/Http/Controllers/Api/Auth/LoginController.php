@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthRequests\LoginRequest;
 use App\Traits\ApiHttpResponses;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AuthRequests\LoginRequest;
 
 class LoginController extends Controller {
 
@@ -15,14 +15,14 @@ class LoginController extends Controller {
 
         $credentials = $request->only( 'phone', 'password' );
 
-// Attempt to authenticate the user
+//? Attempt to authenticate the user
         if ( Auth::attempt( $credentials, true ) ) {
             $user = Auth::user();
 
-            // Create an API token for the authenticated user
-            $token = $user->createToken( 'Login API Token of ' . $user->phone )->plainTextToken;
+            //? Create an API token for the authenticated user
+            $token = $user->createToken( "Login API Token of {$user->phone}" )->plainTextToken;
 
-// Fetch the user's roles
+//? Fetch the user's roles
             // $roles = $user->roles;
             $role = $user->roles->map( function ( $role ) {
                 return [
@@ -31,7 +31,7 @@ class LoginController extends Controller {
                 ];
             } );
 
-            // Return a successful response with user data, roles, and token
+            //? Return a successful response with user data, roles, and token
             return $this->successResponse( [
                 'user'  => [
                     'id'    => $user->id,
@@ -42,7 +42,6 @@ class LoginController extends Controller {
             ], 'Logged in successfully', 200 );
         }
 
-        // Return an error response for invalid credentials
         return $this->errorResponse( 'Invalid credentials', 401 );
     }
 
