@@ -12,6 +12,7 @@ class RoleController extends Controller {
     use ApiHttpResponses;
 
     public function index() {
+
         try {
             $roles = Role::with( 'permissions' )->get();
             return $this->successResponse( ['roles' => $roles] );
@@ -21,6 +22,7 @@ class RoleController extends Controller {
     }
 
     public function store( Request $request ) {
+
         try {
             $request->validate( [
                 'name'          => 'required|unique:roles,name',
@@ -42,6 +44,7 @@ class RoleController extends Controller {
     }
 
     public function show( Role $role ) {
+
         try {
             $permissions = $role->permissions()->get();
             return $this->successResponse( ['role' => $role, 'permissions' => $permissions], 'Role fetched successfully', 200 );
@@ -51,6 +54,7 @@ class RoleController extends Controller {
     }
 
     public function update( Request $request, Role $role ) {
+
         try {
             $request->validate( [
                 'name'          => 'required',
@@ -71,6 +75,7 @@ class RoleController extends Controller {
     }
 
     public function destroy( Role $role ) {
+
         try {
             $role->delete();
             return $this->successResponse( null, 'Role deleted successfully', 200 );

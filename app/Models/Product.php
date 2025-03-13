@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model {
-    use HasFactory;
-    use NodeTrait;
+
+    use HasFactory, NodeTrait;
 
     protected $fillable = ['name'];
 
     public $timestamps = false;
 
     public function posts() {
+
         return $this->belongsToMany( Post::class, 'post_products' );
     }
 }

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Division extends Model {
+
     use HasFactory;
 
     protected $fillable = ['name'];
@@ -13,6 +14,7 @@ class Division extends Model {
     public $timestamps = false;
 
     public function districts() {
+
         return $this->hasMany( District::class );
     }
 }

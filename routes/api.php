@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\Api\Address\DistrictController;
-use App\Http\Controllers\Api\Address\DivisionController;
-use App\Http\Controllers\Api\Address\UpazilaController;
-use App\Http\Controllers\Api\Admin\ManageUserController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Post\PostController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
-use App\Http\Controllers\Api\BothBuyAndSellUsers\GetBothBuyAndSellUsersController;
-use App\Http\Controllers\Api\Post\PostController;
+use App\Http\Controllers\Api\Address\UpazilaController;
+use App\Http\Controllers\Api\Address\DistrictController;
+use App\Http\Controllers\Api\Address\DivisionController;
+use App\Http\Controllers\Api\Admin\ManageUserController;
 use App\Http\Controllers\Api\Products\ProductController;
-use App\Http\Controllers\Api\RolesAndPermissions\PermissionController;
-use App\Http\Controllers\Api\RolesAndPermissions\RoleController;
 use App\Http\Controllers\Api\Users\UserProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\RolesAndPermissions\RoleController;
+use App\Http\Controllers\Api\RolesAndPermissions\PermissionController;
+use App\Http\Controllers\Api\BothBuyAndSellUsers\GetBothBuyAndSellUsersController;
 
 /*
 -----------------------------------------------------------

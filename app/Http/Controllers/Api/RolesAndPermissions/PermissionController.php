@@ -11,6 +11,7 @@ class PermissionController extends Controller {
     use ApiHttpResponses;
 
     public function index() {
+
         try {
             $permissions = Permission::with( 'roles' )->get();
             return $this->successResponse( ['permissions' => $permissions] );

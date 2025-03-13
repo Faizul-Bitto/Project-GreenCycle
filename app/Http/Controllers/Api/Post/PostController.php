@@ -32,10 +32,12 @@ class PostController extends Controller {
     }
 
     private function deleteAssociatedFiles( $post ) {
+
         $post->files()->delete();
     }
 
     private function formatPostResponse( $post ) {
+
         return [
             'id'       => $post->id,
             'user_id'  => $post->user_id,
@@ -61,6 +63,7 @@ class PostController extends Controller {
     }
 
     public function store( StorePostRequest $request ) {
+
         $validatedData = $request->validated();
         $user          = $request->user();
 
@@ -87,6 +90,7 @@ class PostController extends Controller {
     }
 
     public function update( UpdatePostRequest $request, Post $post ) {
+
         $validatedData = $request->validated();
 
         if ( $request->user()->id !== $post->user_id ) {
@@ -109,6 +113,7 @@ class PostController extends Controller {
     }
 
     public function markAsSold( Post $post ) {
+
         $user = auth()->user();
 
         if ( $user->id !== $post->user_id ) {
@@ -133,6 +138,7 @@ class PostController extends Controller {
     }
 
     public function index() {
+
         $posts = Post::with( 'files', 'products' )->get();
         return $this->successResponse( $posts );
     }
@@ -149,6 +155,7 @@ class PostController extends Controller {
     }
 
     public function allActivePosts() {
+
         $user = auth()->user();
 
         $posts = Post::where( 'status', 'Active' )
@@ -161,6 +168,7 @@ class PostController extends Controller {
     }
 
     public function userOwnPosts() {
+
         $user = auth()->user();
 
         $posts = $user->posts()

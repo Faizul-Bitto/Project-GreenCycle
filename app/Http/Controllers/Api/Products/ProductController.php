@@ -12,11 +12,14 @@ class ProductController extends Controller {
     use ApiHttpResponses;
 
     public function index() {
+
         $products = Product::get()->toTree();
+
         return $this->successResponse( $products );
     }
 
     public function store( Request $request ) {
+
         $data = $request->validate( [
             'name'      => 'required|string|max:255',
             'parent_id' => 'nullable|exists:products,id',
@@ -35,11 +38,14 @@ class ProductController extends Controller {
     }
 
     public function show( Product $product ) {
+
         $product->load( 'descendants' );
+
         return $this->successResponse( $product );
     }
 
     public function update( Request $request, Product $product ) {
+
         $data = $request->validate( [
             'name'      => 'sometimes|required|string|max:255',
             'parent_id' => 'nullable|exists:products,id',
@@ -51,11 +57,14 @@ class ProductController extends Controller {
         }
 
         $product->update( $data );
+
         return $this->successResponse( $product, 'Product updated successfully' );
     }
 
     public function destroy( Product $product ) {
+
         $product->delete();
+
         return $this->successResponse( null, 'Product deleted successfully', 204 );
     }
 

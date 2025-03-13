@@ -11,10 +11,12 @@ class UpazilaController extends Controller {
     use ApiHttpResponses;
 
     public function index() {
+
         //? Eager load the 'district' relationship
         // $upazilas = Upazila::with( 'district' )->get();
         //? Eager load the 'district' relationship
         $upazilas = Upazila::all();
+
         return $this->successResponse( $upazilas, 'Upazilas retrieved successfully' );
     }
 }

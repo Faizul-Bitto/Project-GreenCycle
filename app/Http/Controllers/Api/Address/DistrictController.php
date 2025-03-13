@@ -12,10 +12,12 @@ class DistrictController extends Controller {
 
     //? Method to retrieve all Districts
     public function index() {
+
         //? Eager load the 'division' relationship
         // $districts = District::with( 'division' )->get();
         //? Eager load the 'division' relationship
         $districts = District::all();
+
         return $this->successResponse( $districts, 'Districts retrieved successfully' );
     }
 }

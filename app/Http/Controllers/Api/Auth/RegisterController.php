@@ -17,6 +17,7 @@ class RegisterController extends Controller {
 
     //! Registers a new user with phone number and password (First step of registration)
     public function createUser( StoreUserRequest $request ) {
+
         $validatedData = $request->validated();
 
 //? Check if phone number already exists in the database
@@ -48,6 +49,7 @@ class RegisterController extends Controller {
 
     //! Adds additional information for the user (Second step of registration)
     public function addUserInformation( StoreUserDetailsRequest $request, User $user ) {
+
         $validatedData = $request->validated();
 
         //? Update or create user details

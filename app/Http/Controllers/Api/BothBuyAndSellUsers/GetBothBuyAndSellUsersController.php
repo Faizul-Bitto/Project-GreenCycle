@@ -13,58 +13,7 @@ class GetBothBuyAndSellUsersController extends Controller {
     use ApiHttpResponses;
     public function getBothBuyAndSellUsersByRoles() {
 
-// // Ensure the user is authenticated
-
-// $authenticatedUser = Auth::user();
-
-// if ( !$authenticatedUser ) {
-
-//     return $this->errorResponse( 'Unauthorized', 401 );
-
-// }
-
-// $roles = ['Vangari', 'Waste Collector', 'Recycling Company'];
-
-// $users = User::with( ['userDetail.division', 'userDetail.district', 'userDetail.upazila'] )
-
-//     ->whereHas( 'roles', function ( $query ) use ( $roles ) {
-
-//         $query->whereIn( 'name', $roles );
-
-//     } )
-
-//     ->get()
-
-//     ->map( function ( $user ) {
-
-//         return [
-
-//             'id'      => $user->id,
-
-//             'phone'   => $user->phone,
-
-//             'role'    => $user->roles->pluck( 'name' ),
-
-//             'details' => [
-
-//                 'name'     => $user->userDetail->name ?? null,
-
-//                 'division' => $user->userDetail->division->name ?? null,
-
-//                 'district' => $user->userDetail->district->name ?? null,
-
-//                 'upazila'  => $user->userDetail->upazila->name ?? null,
-
-//                 'area'     => $user->userDetail->area ?? null,
-
-//             ],
-
-//         ];
-
-//     } );
-
-// return $this->successResponse( $users, 'Users fetched successfully' );
-        // Ensure the user is authenticated
+        //? Ensure the user is authenticated
         $authenticatedUser = Auth::user();
 
         if ( !$authenticatedUser ) {
@@ -73,7 +22,7 @@ class GetBothBuyAndSellUsersController extends Controller {
 
         $roles = ['Vangari', 'Waste Collector', 'Recycling Company'];
 
-// Get the authenticated user's area
+//? Get the authenticated user's area
         $authenticatedUserArea = $authenticatedUser->userDetail->area;
 
         $users = User::with( ['userDetail.division', 'userDetail.district', 'userDetail.upazila', 'roles'] )
@@ -104,7 +53,8 @@ class GetBothBuyAndSellUsersController extends Controller {
     }
 
     public function searchUsers( Request $request ) {
-        // Ensure the user is authenticated
+
+        //? Ensure the user is authenticated
         $authenticatedUser = Auth::user();
 
         if ( !$authenticatedUser ) {
@@ -113,7 +63,7 @@ class GetBothBuyAndSellUsersController extends Controller {
 
         $roles = ['Vangari', 'Waste Collector', 'Recycling Company'];
 
-        // Get search parameters
+        //? Get search parameters
         $division = $request->input( 'division' );
         $district = $request->input( 'district' );
         $upazila  = $request->input( 'upazila' );
@@ -124,7 +74,7 @@ class GetBothBuyAndSellUsersController extends Controller {
                 $query->whereIn( 'name', $roles );
             } );
 
-// Apply filters
+//? Apply filters
         if ( $division ) {
             $query->whereHas( 'userDetail.division', function ( $q ) use ( $division ) {
                 $q->where( 'name', $division );

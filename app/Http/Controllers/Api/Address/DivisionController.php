@@ -12,7 +12,9 @@ class DivisionController extends Controller {
 
     //? Method to retrieve all Divisions
     public function index() {
+
         $divisions = Division::all();
+
         return $this->successResponse( $divisions, 'Divisions retrieved successfully' );
     }
 }

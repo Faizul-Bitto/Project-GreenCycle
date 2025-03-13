@@ -12,11 +12,14 @@ class ManageUserController extends Controller {
     use ApiHttpResponses;
 
     public function userList() {
+
         $users = User::all();
+
         return $this->successResponse( $users, 'List of users retrieved successfully' );
     }
 
     public function showUser( User $user ) {
+
         return $this->successResponse( $user, 'User details retrieved successfully' );
     }
 
@@ -31,11 +34,14 @@ class ManageUserController extends Controller {
     }
 
     public function destroyUser( User $user ) {
+
         $user->delete();
+
         return $this->successResponse( null, 'User deleted successfully' );
     }
 
     public function updateUserDetails( Request $request, User $user ) {
+
         $validatedData = $this->validateUserDetails( $request );
 
         $userDetail = $user->userDetail()->updateOrCreate( [], $validatedData );
@@ -44,6 +50,7 @@ class ManageUserController extends Controller {
     }
 
     public function updatePhone( Request $request, User $user ) {
+
         // $this->authorizeUser( $user );
 
         $validatedData = $request->validate( [
@@ -56,6 +63,7 @@ class ManageUserController extends Controller {
     }
 
     public function updatePassword( Request $request, User $user ) {
+
         // $this->authorizeUser( $user );
 
         $validatedData = $request->validate( [

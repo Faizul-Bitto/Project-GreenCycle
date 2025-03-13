@@ -29,7 +29,7 @@ class UserProfileController extends Controller {
         }
 
         $validatedData = $request->validate( [
-            'phone' => 'required|unique:users,phone,' . $user->id,
+            'phone' => "required|unique:users,phone,{$user->id}",
         ] );
 
         $user->update( [
@@ -42,7 +42,6 @@ class UserProfileController extends Controller {
     public function updatePassword( Request $request, User $user ) {
 
 //? Check if the authenticated user is updating his/her own profile
-
         if ( $response = $this->authorizeUser( $user ) ) {
             return $response;
         }
